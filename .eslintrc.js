@@ -24,6 +24,7 @@ module.exports = {
       2,
       {"SwitchCase": 1}
     ],
+    "no-multi-spaces": "error",
     "linebreak-style": [
       "error",
       "unix"

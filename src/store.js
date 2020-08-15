@@ -5,8 +5,8 @@ import filterReducer from './reducers/filterReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 const reducer = combineReducers({
-  anecdotes: anecdoteReducer,
   notification: notificationReducer,
+  anecdotes: anecdoteReducer,
   filter: filterReducer
 })
 
