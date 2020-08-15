@@ -1,19 +1,27 @@
 
+import anecdoteService from '../services/anecdotes'
 //action creators
-export const voteFor = (id) => {
-  return {
-    type: 'VOTE',
-    data: {
-      id: id
-    }
+export const voteFor = (anecdote) => {
+  return async dispatch => {
+    await anecdoteService.updateVote(anecdote)
+    dispatch({
+      type: 'VOTE',
+      data:
+        anecdote
+
+    })
   }
 }
+
+
+
 export const createAnecdote = (content) => {
-  return {
-    type: 'NEW_ANECDOTE',
-    data: {
-      content: content
-    }
+  return async dispatch => {
+    const newAnecdote = await anecdoteService.createNew(content)
+    dispatch({
+      type: 'NEW_ANECDOTE',
+      data: newAnecdote
+    })
   }
 }
 
@@ -24,18 +32,7 @@ export const initializeAnecdotes = (anecdotes) => {
   }
 }
 
-//const getId = () => (100000 * Math.random()).toFixed(0)
-
-//const asObject = (anecdote) => {
-//  return {
-//    content: anecdote,
-//    id: getId(),
-//   votes: 0
-//  }
-//}
-
 const reducer = (state = [], action) => {
-  // eslint-disable-next-line no-undef
   switch(action.type) {
     case 'VOTE':
       return (
@@ -45,7 +42,7 @@ const reducer = (state = [], action) => {
         )
       )
     case 'NEW_ANECDOTE':
-      return [...state, action.data.content]
+      return [...state, action.data]
     case 'INIT_ANECDOTES':
       return action.data
     default:

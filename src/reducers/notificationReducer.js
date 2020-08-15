@@ -1,9 +1,14 @@
 //action creators
-export const notifyVote = (anecdote) => {
 
-  return {
-    type: 'SET_VOTE_MESSAGE',
-    data:  anecdote.content
+export const setNotification = (message, timer) => {
+  return async dispatch => {
+    setTimeout(() => {
+      dispatch(clearMessage())
+    }, timer*1000)
+    dispatch({
+      type: 'SET_NOTIFICATION',
+      data: message
+    })
 
   }
 }
@@ -27,10 +32,8 @@ export const clearMessage = () => {
 
 const reducer = (state = null, action) => {
   switch(action.type){
-    case 'SET_VOTE_MESSAGE':
-      return `you voted for '${action.data}'`
-    case 'SET_ADD_MESSAGE':
-      return `you added the anecdote '${action.data}'`
+    case 'SET_NOTIFICATION':
+      return action.data
     case 'CLEAR_MESSAGE':
       return null
     default:
