@@ -1,10 +1,14 @@
 //action creators
 
+let timeout
+
 export const setNotification = (message, timer) => {
   return async dispatch => {
-    setTimeout(() => {
+    console.log('clearing timer ', timeout)
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
       dispatch(clearMessage())
-    }, timer*1000)
+    }, timer * 1000)
     dispatch({
       type: 'SET_NOTIFICATION',
       data: message

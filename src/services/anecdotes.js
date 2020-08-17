@@ -8,7 +8,6 @@ const getAll = async () => {
 }
 
 const updateVote = async (newObect) => {
-  console.log('new object id is', newObect.id)
   const response = await axios.put(`${baseUrl}/${newObect.id}`, newObect)
   return response.data
 }
